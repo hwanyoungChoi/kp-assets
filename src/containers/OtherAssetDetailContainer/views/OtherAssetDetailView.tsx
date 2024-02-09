@@ -4,6 +4,8 @@ import { useLocation, useParams } from 'react-router-dom';
 import useAsset from '@/hooks/queries/useAsset';
 import { AssetType } from '@/types';
 import { ASSET_TYPE_MAP } from '@/lib/constants';
+import TextButton from '@/components/Button/TextButton';
+import IconChevronRight from '@/assets/icon_chevron_right.svg?react';
 
 export default function OtherAssetDetailView() {
   const { id } = useParams<{ id: string }>();
@@ -29,13 +31,20 @@ export default function OtherAssetDetailView() {
         </S.Info>
         <S.Info>
           메모
-          <em>{detail?.memo}</em>
+          {detail?.memo ? (
+            <em>{detail?.memo}</em>
+          ) : (
+            <S.EditButtonWrapper>
+              <S.EditButton>입력하기</S.EditButton>
+              <IconChevronRight />
+            </S.EditButtonWrapper>
+          )}
         </S.Info>
       </S.InnerContainer>
 
       <S.ButtonWrapper>
-        <button>삭제하기</button>
-        <button>수정하기</button>
+        <TextButton>삭제하기</TextButton>
+        <TextButton>수정하기</TextButton>
       </S.ButtonWrapper>
     </S.Container>
   );

@@ -4,6 +4,7 @@ import List from '../components/List';
 import * as S from './OtherAssetListView.styled';
 import useAssets from '@/hooks/queries/useAssets';
 import useLiabilities from '@/hooks/queries/useLiabilities';
+import TextButton from '@/components/Button/TextButton';
 
 export default function OtherAssetListView() {
   const { data: assets } = useAssets();
@@ -43,7 +44,7 @@ export default function OtherAssetListView() {
       </S.ListContainer>
 
       <S.ButtonWrapper>
-        <button>기타 자산 등록</button>
+        <TextButton>기타 자산 등록</TextButton>
       </S.ButtonWrapper>
     </S.Container>
   );

@@ -10,8 +10,12 @@
   -webkit-text-size-adjust: 100%;
 }
 
-body {
+* {
   margin: 0;
+  padding: 0;
+}
+
+body {
   min-width: 375px;
   min-height: 100vh;
 }
@@ -22,6 +26,4 @@ em {
 
 ul {
   list-style: none;
-  margin: 0;
-  padding: 0;
 }

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import COLORS from '../../../../lib/colors';
+import COLORS from '@/lib/colors';
 
 export const Container = styled.div`
   padding: 0 24px;

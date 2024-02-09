@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as S from './Accordion.styled';
-import IconChevronUp from '../../../../assets/icon_chevron_up.svg?react';
+import IconChevronUp from '@/assets/icon_chevron_up.svg?react';
 
 interface Props {
   isOpen?: boolean;

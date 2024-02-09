@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import COLORS from '@/lib/colors';
+import ButtonBase from '@/components/Button/ButtonBase';
 
 export const Container = styled.div`
   padding: 0 24px;
@@ -36,6 +37,16 @@ export const Info = styled.div`
     font-weight: 700;
     text-align: right;
   }
+`;
+
+export const EditButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const EditButton = styled(ButtonBase)`
+  color: ${COLORS.S10};
 `;
 
 export const ButtonWrapper = styled.div`

@@ -1,6 +1,12 @@
 import styled from '@emotion/styled';
 import COLORS from '@/lib/colors';
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
+
 export const TotalSection = styled.div`
   padding: 24px 24px 36px;
   display: flex;
@@ -25,15 +31,8 @@ export const SectionDivider = styled.div`
   height: 15px;
 `;
 
-export const HeaderContent = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  font-size: 18px;
-  line-height: 26px;
-  font-weight: 400;
-  color: ${COLORS.B20};
+export const ListContainer = styled.div`
+  flex: 1;
 `;
 
 export const ButtonWrapper = styled.div`

@@ -16,7 +16,7 @@ export default function OtherAssetListView() {
   const totalAmount = totalAssetsAmount + totalLiabilitiesAmount;
 
   return (
-    <>
+    <S.Container>
       <S.TotalSection>
         기타 자산
         <em>{toFormattedPrice(totalAmount)}</em>
@@ -24,25 +24,27 @@ export default function OtherAssetListView() {
 
       <S.SectionDivider />
 
-      <Accordion
-        headerContent="자산"
-        collpaseContent={toFormattedPrice(totalAssetsAmount)}
-        hideCollapseIcon={!assets?.length}
-      >
-        <List items={assets} />
-      </Accordion>
+      <S.ListContainer>
+        <Accordion
+          headerContent="자산"
+          collpaseContent={toFormattedPrice(totalAssetsAmount)}
+          hideCollapseIcon={!assets?.length}
+        >
+          <List items={assets} />
+        </Accordion>
 
-      <Accordion
-        headerContent="부채"
-        collpaseContent={toFormattedPrice(totalLiabilitiesAmount)}
-        hideCollapseIcon={!liabilities?.length}
-      >
-        <List items={liabilities} />
-      </Accordion>
+        <Accordion
+          headerContent="부채"
+          collpaseContent={toFormattedPrice(totalLiabilitiesAmount)}
+          hideCollapseIcon={!liabilities?.length}
+        >
+          <List items={liabilities} />
+        </Accordion>
+      </S.ListContainer>
 
       <S.ButtonWrapper>
         <button>기타 자산 등록</button>
       </S.ButtonWrapper>
-    </>
+    </S.Container>
   );
 }

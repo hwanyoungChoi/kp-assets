@@ -3,7 +3,14 @@ import COLORS from '@/lib/colors';
 
 export const Container = styled.div`
   padding: 0 24px;
+  height: 100vh;
   word-break: break-all;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const InnerContainer = styled.div`
+  flex: 1;
 `;
 
 export const Title = styled.div`

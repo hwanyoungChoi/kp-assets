@@ -8,7 +8,7 @@ export const Container = styled.div`
 `;
 
 export const TotalSection = styled.div`
-  padding: 24px 24px 36px;
+  padding: 25px 24px 39px;
   display: flex;
   flex-direction: column;
   gap: 5px;

@@ -15,7 +15,7 @@ export const InnerContainer = styled.div`
 `;
 
 export const Title = styled.div`
-  padding: 24px 0 40px;
+  padding: 25px 0 40px;
   font-size: 24px;
   line-height: 34px;
   font-weight: 700;

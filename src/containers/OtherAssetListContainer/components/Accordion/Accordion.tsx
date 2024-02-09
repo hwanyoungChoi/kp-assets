@@ -6,12 +6,14 @@ interface Props {
   isOpen?: boolean;
   headerContent: string | React.ReactNode;
   collpaseContent?: string | React.ReactNode;
+  hideCollapseIcon?: boolean;
 }
 
 export default function Accordion({
   isOpen = true,
   headerContent,
   collpaseContent,
+  hideCollapseIcon = false,
   children,
 }: React.PropsWithChildren<Props>) {
   const [opened, setOpened] = useState(isOpen);
@@ -23,9 +25,12 @@ export default function Accordion({
 
         <S.Collapse onClick={() => setOpened((prev) => !prev)}>
           {collpaseContent}
-          <S.CollapseIconWrapper isOpen={opened}>
-            <IconChevronUp />
-          </S.CollapseIconWrapper>
+
+          {!hideCollapseIcon && (
+            <S.CollapseIconWrapper isOpen={opened}>
+              <IconChevronUp />
+            </S.CollapseIconWrapper>
+          )}
         </S.Collapse>
       </S.Header>
 

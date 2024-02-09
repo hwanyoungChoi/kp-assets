@@ -2,6 +2,6 @@ export interface AssetItem {
   id: number;
   name: string;
   amount: number;
-  type: "ASSETS" | "LIABILITIES";
+  type: 'ASSETS' | 'LIABILITIES';
   memo?: string;
 }

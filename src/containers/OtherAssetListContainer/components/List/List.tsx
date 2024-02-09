@@ -4,8 +4,13 @@ import IconLiabilitiesItem from '@/assets/icon_liabilities_item.svg?react';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '@/lib/routes';
 import { toFormattedPrice } from '@/lib/utils';
+import { AssetItem } from '@/types';
 
-export default function List() {
+interface Props {
+  items?: AssetItem[];
+}
+
+export default function List({ items }: Props) {
   const navigate = useNavigate();
 
   const handleItemClick = (id: number) => {
@@ -14,13 +19,20 @@ export default function List() {
 
   return (
     <ul>
-      <S.ItemContainer onClick={() => handleItemClick(1)}>
-        <IconAssetsItem />
-        <S.ItemInfo>
-          골드바
-          <em>{toFormattedPrice(2500000)}</em>
-        </S.ItemInfo>
-      </S.ItemContainer>
+      {items?.map((item) => (
+        <S.ItemContainer key={item.id} onClick={() => handleItemClick(item.id)}>
+          {item.type === 'ASSETS' ? (
+            <IconAssetsItem />
+          ) : (
+            <IconLiabilitiesItem />
+          )}
+
+          <S.ItemInfo>
+            {item.name}
+            <em>{toFormattedPrice(item.amount)}</em>
+          </S.ItemInfo>
+        </S.ItemContainer>
+      ))}
     </ul>
   );
 }

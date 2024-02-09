@@ -26,7 +26,7 @@ export const Collapse = styled.div`
 `;
 
 export const CollapseIconWrapper = styled.div<{ isOpen: boolean }>`
-  transform: ${(props) => !props.isOpen && 'rotate(180deg)'};
+  transform: ${(props) => !props.isOpen && 'rotate(-180deg)'};
   transition: all ease 0.2s;
   display: flex;
   justify-content: center;

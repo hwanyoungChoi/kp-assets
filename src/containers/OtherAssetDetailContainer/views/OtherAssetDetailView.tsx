@@ -1,4 +1,4 @@
-import { toFormattedPrice } from '../../../lib/utils';
+import { toFormattedPrice } from '@/lib/utils';
 import * as S from './OtherAssetDetailView.styled';
 
 export default function OtherAssetDetailView() {

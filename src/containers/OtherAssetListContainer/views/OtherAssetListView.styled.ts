@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import COLORS from '../../../lib/colors';
+import COLORS from '@/lib/colors';
 
 export const TotalSection = styled.div`
   padding: 24px 24px 36px;

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import COLORS from '../../../../lib/colors';
+import COLORS from '@/lib/colors';
 
 export const ItemContainer = styled.li`
   padding: 17px 0;

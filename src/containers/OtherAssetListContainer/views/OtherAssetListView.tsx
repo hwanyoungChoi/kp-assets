@@ -1,4 +1,4 @@
-import { toFormattedPrice } from '../../../lib/utils';
+import { toFormattedPrice } from '@/lib/utils';
 import Accordion from '../components/Accordion';
 import List from '../components/List';
 import * as S from './OtherAssetListView.styled';

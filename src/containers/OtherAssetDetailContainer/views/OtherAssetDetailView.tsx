@@ -1,3 +1,4 @@
+import { toFormattedPrice } from '../../../lib/utils';
 import * as S from './OtherAssetDetailView.styled';
 
 export default function OtherAssetDetailView() {
@@ -11,7 +12,7 @@ export default function OtherAssetDetailView() {
       </S.Info>
       <S.Info>
         자산가치
-        <em>2500000000원</em>
+        <em>{toFormattedPrice(2500000000)}</em>
       </S.Info>
       <S.Info>
         메모

@@ -5,8 +5,11 @@ import * as S from './OtherAssetListView.styled';
 import useAssets from '@/hooks/queries/useAssets';
 import useLiabilities from '@/hooks/queries/useLiabilities';
 import TextButton from '@/components/Button/TextButton';
+import { useNavigate } from 'react-router-dom';
 
 export default function OtherAssetListView() {
+  const navigate = useNavigate();
+
   const { data: assets } = useAssets();
   const { data: liabilities } = useLiabilities();
 
@@ -15,6 +18,10 @@ export default function OtherAssetListView() {
   const totalLiabilitiesAmount =
     liabilities?.reduce((acc, item) => acc + item.amount, 0) || 0;
   const totalAmount = totalAssetsAmount + totalLiabilitiesAmount;
+
+  const handleEditButtonClick = () => {
+    navigate(`/other-asset-edit`);
+  };
 
   return (
     <S.Container>
@@ -44,7 +51,7 @@ export default function OtherAssetListView() {
       </S.ListContainer>
 
       <S.ButtonWrapper>
-        <TextButton>기타 자산 등록</TextButton>
+        <TextButton onClick={handleEditButtonClick}>기타 자산 등록</TextButton>
       </S.ButtonWrapper>
     </S.Container>
   );

@@ -1,6 +1,6 @@
 import { toFormattedPrice } from '@/lib/utils';
 import * as S from './OtherAssetDetailView.styled';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useAsset from '@/hooks/queries/useAsset';
 import { AssetType } from '@/types';
 import { ASSET_TYPE_MAP } from '@/lib/constants';
@@ -8,6 +8,8 @@ import TextButton from '@/components/Button/TextButton';
 import IconChevronRight from '@/assets/icon_chevron_right.svg?react';
 
 export default function OtherAssetDetailView() {
+  const navigate = useNavigate();
+
   const { id } = useParams<{ id: string }>();
   const { search } = useLocation();
 
@@ -15,6 +17,14 @@ export default function OtherAssetDetailView() {
   const type = queryParams.get('type') as AssetType;
 
   const { data: detail } = useAsset({ id, type });
+
+  const handleDeleteButtonClick = () => {
+    window.alert('delete');
+  };
+
+  const handleEditButtonClick = () => {
+    navigate(`/other-asset-edit/${id}`);
+  };
 
   return (
     <S.Container>
@@ -35,7 +45,9 @@ export default function OtherAssetDetailView() {
             <em>{detail?.memo}</em>
           ) : (
             <S.EditButtonWrapper>
-              <S.EditButton>입력하기</S.EditButton>
+              <S.EditButton onClick={handleEditButtonClick}>
+                입력하기
+              </S.EditButton>
               <IconChevronRight />
             </S.EditButtonWrapper>
           )}
@@ -43,8 +55,8 @@ export default function OtherAssetDetailView() {
       </S.InnerContainer>
 
       <S.ButtonWrapper>
-        <TextButton>삭제하기</TextButton>
-        <TextButton>수정하기</TextButton>
+        <TextButton onClick={handleDeleteButtonClick}>삭제하기</TextButton>
+        <TextButton onClick={handleEditButtonClick}>수정하기</TextButton>
       </S.ButtonWrapper>
     </S.Container>
   );

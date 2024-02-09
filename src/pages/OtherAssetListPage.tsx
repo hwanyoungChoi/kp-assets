@@ -1,3 +1,10 @@
+import { useEffect } from 'react';
+import OtherAssetListView from '../containers/OtherAssetListContainer/views/OtherAssetListView';
+
 export default function OtherAssetListPage() {
-  return <div>List</div>;
+  useEffect(() => {
+    window.document.title = '기타 자산';
+  }, []);
+
+  return <OtherAssetListView />;
 }

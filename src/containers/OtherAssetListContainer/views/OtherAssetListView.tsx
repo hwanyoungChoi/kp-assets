@@ -13,6 +13,13 @@ export default function OtherAssetListView() {
   const { data: assets } = useAssets();
   const { data: liabilities } = useLiabilities();
 
+  const totalCount = (assets?.length || 0) + (liabilities?.length || 0);
+
+  if (!totalCount) {
+    navigate('/other-asset-edit');
+    return null;
+  }
+
   const totalAssetsAmount =
     assets?.reduce((acc, item) => acc + item.amount, 0) || 0;
   const totalLiabilitiesAmount =

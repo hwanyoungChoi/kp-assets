@@ -6,7 +6,7 @@ import { AssetForm, AssetType } from '@/types';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Form from '../components/form/form';
+import Form from '../components/form';
 import { useEffect } from 'react';
 import Button from '@/components/Button/Button';
 

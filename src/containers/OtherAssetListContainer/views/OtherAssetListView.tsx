@@ -6,6 +6,7 @@ import useAssets from '@/hooks/queries/useAssets';
 import useLiabilities from '@/hooks/queries/useLiabilities';
 import TextButton from '@/components/Button/TextButton';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function OtherAssetListView() {
   const navigate = useNavigate();
@@ -15,10 +16,11 @@ export default function OtherAssetListView() {
 
   const totalCount = (assets?.length || 0) + (liabilities?.length || 0);
 
-  if (!totalCount) {
-    navigate('/other-asset-edit');
-    return null;
-  }
+  useEffect(() => {
+    if (!totalCount) {
+      navigate('/other-asset-edit');
+    }
+  }, [navigate, totalCount]);
 
   const totalAssetsAmount =
     assets?.reduce((acc, item) => acc + item.amount, 0) || 0;

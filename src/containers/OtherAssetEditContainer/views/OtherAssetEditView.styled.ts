@@ -22,8 +22,4 @@ export const InnerContainer = styled.div`
 
 export const ButtonWrapper = styled.div`
   padding-bottom: max(16px, calc(env(safe-area-inset-bottom)));
-
-  > button {
-    width: 100%;
-  }
 `;

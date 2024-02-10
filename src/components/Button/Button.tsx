@@ -1,8 +1,8 @@
 import { forwardRef } from 'react';
 import { Props } from './types';
-import * as S from './TextButton.styled';
+import * as S from './Button.styled';
 
-const TextButton = forwardRef<HTMLButtonElement, Props>(
+const Button = forwardRef<HTMLButtonElement, Props>(
   ({ children, ...props }, ref) => {
     return (
       <S.Base ref={ref} {...props}>
@@ -12,4 +12,4 @@ const TextButton = forwardRef<HTMLButtonElement, Props>(
   },
 );
 
-export default TextButton;
+export default Button;

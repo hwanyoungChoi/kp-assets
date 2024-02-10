@@ -1,4 +1,3 @@
-import TextButton from '@/components/Button/TextButton';
 import * as S from './OtherAssetEditView.styled';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useAssetCreate from '@/hooks/mutations/useAssetCreate';
@@ -9,6 +8,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Form from '../components/form/form';
 import { useEffect } from 'react';
+import Button from '@/components/Button/Button';
 
 const SCHEMA = yup.object().shape({
   name: yup
@@ -96,9 +96,9 @@ export default function OtherAssetEditView() {
         </S.InnerContainer>
 
         <S.ButtonWrapper>
-          <TextButton type="submit">
+          <Button type="submit" width="100%" variant="primary">
             {isNew ? '등록하기' : '수정하기'}
-          </TextButton>
+          </Button>
         </S.ButtonWrapper>
       </S.Container>
     </FormProvider>

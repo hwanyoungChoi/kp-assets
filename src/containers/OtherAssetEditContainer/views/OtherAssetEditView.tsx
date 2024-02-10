@@ -4,9 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useAssetCreate from '@/hooks/mutations/useAssetCreate';
 import useAssetUpdate from '@/hooks/mutations/useAssetUpdate';
 import { AssetForm, AssetType } from '@/types';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Form from '../components/form/form';
 
 const SCHEMA = yup.object().shape({
   name: yup
@@ -32,7 +33,7 @@ export default function OtherAssetEditView() {
   const navigate = useNavigate();
 
   const { id } = useParams<{ id: string }>();
-  const isRegister = !id;
+  const isNew = !id;
 
   const createAsset = useAssetCreate();
   const updateAsset = useAssetUpdate();
@@ -64,39 +65,33 @@ export default function OtherAssetEditView() {
     }
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ mode: 'onBlur', resolver: yupResolver(SCHEMA) });
+  const methods = useForm({
+    mode: 'onBlur',
+    resolver: yupResolver(SCHEMA),
+  });
+  const { handleSubmit } = methods;
 
   return (
-    <S.Container>
-      <S.InnerContainer>
-        <h1>
-          현금부터 실물 자산까지
-          <br />
-          직접 등록해 보세요
-        </h1>
+    <FormProvider {...methods}>
+      <S.Container
+        onSubmit={isNew ? handleSubmit(onCreate) : handleSubmit(onUpdate)}
+      >
+        <S.InnerContainer>
+          <h1>
+            현금부터 실물 자산까지
+            <br />
+            직접 등록해 보세요
+          </h1>
 
-        <S.InputContainer>
-          <input {...register('name')} />
-          <br />
-          <input {...register('type')} />
-          <br />
-          <input {...register('amount')} />
-          <br />
-          <input {...register('memo')} />
-        </S.InputContainer>
-      </S.InnerContainer>
+          <Form />
+        </S.InnerContainer>
 
-      <S.ButtonWrapper>
-        {isRegister ? (
-          <TextButton onClick={handleSubmit(onCreate)}>등록하기</TextButton>
-        ) : (
-          <TextButton onClick={handleSubmit(onUpdate)}>수정하기</TextButton>
-        )}
-      </S.ButtonWrapper>
-    </S.Container>
+        <S.ButtonWrapper>
+          <TextButton type="submit">
+            {isNew ? '등록하기' : '수정하기'}
+          </TextButton>
+        </S.ButtonWrapper>
+      </S.Container>
+    </FormProvider>
   );
 }

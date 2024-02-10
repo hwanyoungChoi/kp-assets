@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div`
+export const Container = styled.form`
   padding: 0 16px;
   height: 100vh;
   display: flex;
@@ -18,15 +18,6 @@ export const InnerContainer = styled.div`
     font-size: 20px;
     line-height: 28px;
   }
-`;
-
-export const InputContainer = styled.div`
-  padding: 0 1px;
-  border-radius: 16px;
-  border: 1px solid black;
-
-  width: 100%;
-  height: 320px;
 `;
 
 export const ButtonWrapper = styled.div`

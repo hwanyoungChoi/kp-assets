@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Container = styled.form`
   padding: 0 16px;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
 `;

@@ -37,9 +37,9 @@ export default function OtherAssetListView() {
         <em>{toFormattedPrice(totalAmount)}</em>
       </S.TotalSection>
 
-      <S.SectionDivider />
-
       <S.ListContainer>
+        <S.SectionDivider />
+
         <Accordion
           headerContent="자산"
           collpaseContent={toFormattedPrice(totalAssetsAmount)}

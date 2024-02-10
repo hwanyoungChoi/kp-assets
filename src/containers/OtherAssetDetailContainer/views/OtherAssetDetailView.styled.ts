@@ -4,7 +4,7 @@ import ButtonBase from '@/components/Button/ButtonBase';
 
 export const Container = styled.div`
   padding: 0 24px;
-  height: 100vh;
+  height: 100%;
   word-break: break-all;
   display: flex;
   flex-direction: column;

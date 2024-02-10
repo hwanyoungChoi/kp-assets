@@ -4,7 +4,7 @@ import COLORS from '@/lib/colors';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
 `;
 
 export const TotalSection = styled.div`

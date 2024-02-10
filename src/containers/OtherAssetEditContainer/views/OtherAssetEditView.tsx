@@ -3,7 +3,30 @@ import * as S from './OtherAssetEditView.styled';
 import { useNavigate, useParams } from 'react-router-dom';
 import useAssetCreate from '@/hooks/mutations/useAssetCreate';
 import useAssetUpdate from '@/hooks/mutations/useAssetUpdate';
-import { AssetType } from '@/types';
+import { AssetForm, AssetType } from '@/types';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+const SCHEMA = yup.object().shape({
+  name: yup
+    .string()
+    .required('최소 1자를 입력해주세요')
+    .min(2, '최소 2자부터 입력 가능해요')
+    .max(20, '최대 20자까지 입력 가능해요'),
+  type: yup
+    .mixed<AssetType>()
+    .oneOf(Object.values(AssetType))
+    .required('필수 선택해 주세요'),
+  amount: yup
+    .number()
+    .required('필수 입력해 주세요')
+    .max(1000000000, '최대 입력 금액을 초과했어요'),
+  memo: yup
+    .string()
+    .min(2, '최소 2자를 입력해 주세요')
+    .max(30, '최대 30자까지 입력 가능해요'),
+});
 
 export default function OtherAssetEditView() {
   const navigate = useNavigate();
@@ -14,16 +37,11 @@ export default function OtherAssetEditView() {
   const createAsset = useAssetCreate();
   const updateAsset = useAssetUpdate();
 
-  const handleCreateButtonClick = async () => {
+  const onCreate = async (asset: AssetForm) => {
     try {
       await createAsset.mutateAsync({
-        asset: {
-          name: 'test',
-          amount: 33333333,
-          type: 'ASSETS',
-          memo: 'ddd',
-        },
-        type: AssetType.Assets,
+        asset,
+        type: asset.type as AssetType,
       });
 
       navigate(-1);
@@ -32,17 +50,12 @@ export default function OtherAssetEditView() {
     }
   };
 
-  const handleUpdateButtonClick = async () => {
+  const onUpdate = async (asset: AssetForm) => {
     try {
       await updateAsset.mutateAsync({
-        id: 951,
-        asset: {
-          name: 'hello',
-          amount: 100,
-          type: 'ASSETS',
-          memo: 'aa',
-        },
-        type: AssetType.Assets,
+        id,
+        asset,
+        type: asset.type as AssetType,
       });
 
       navigate(-1);
@@ -50,6 +63,12 @@ export default function OtherAssetEditView() {
       window.alert('오류 발생');
     }
   };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: 'onBlur', resolver: yupResolver(SCHEMA) });
 
   return (
     <S.Container>
@@ -60,14 +79,22 @@ export default function OtherAssetEditView() {
           직접 등록해 보세요
         </h1>
 
-        <S.InputContainer />
+        <S.InputContainer>
+          <input {...register('name')} />
+          <br />
+          <input {...register('type')} />
+          <br />
+          <input {...register('amount')} />
+          <br />
+          <input {...register('memo')} />
+        </S.InputContainer>
       </S.InnerContainer>
 
       <S.ButtonWrapper>
         {isRegister ? (
-          <TextButton onClick={handleCreateButtonClick}>등록하기</TextButton>
+          <TextButton onClick={handleSubmit(onCreate)}>등록하기</TextButton>
         ) : (
-          <TextButton onClick={handleUpdateButtonClick}>수정하기</TextButton>
+          <TextButton onClick={handleSubmit(onUpdate)}>수정하기</TextButton>
         )}
       </S.ButtonWrapper>
     </S.Container>

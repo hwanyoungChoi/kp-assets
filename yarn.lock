@@ -796,6 +796,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rooks/use-fork-ref@npm:^4.11.2":
+  version: 4.11.2
+  resolution: "@rooks/use-fork-ref@npm:4.11.2"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10c0/ac5b8d119bb6964e6284719a1f77ca9476bcb1d9dc60d8d5a9ebc975f4e2253b98d5b8e4714663c69d4108eb35ba874ebc2a4624f767896772fc77c65579a9ac
+  languageName: node
+  linkType: hard
+
 "@svgr/babel-plugin-add-jsx-attribute@npm:8.0.0":
   version: 8.0.0
   resolution: "@svgr/babel-plugin-add-jsx-attribute@npm:8.0.0"
@@ -2992,6 +3001,7 @@ __metadata:
     "@emotion/react": "npm:^11.11.3"
     "@emotion/styled": "npm:^11.11.0"
     "@hookform/resolvers": "npm:^3.3.4"
+    "@rooks/use-fork-ref": "npm:^4.11.2"
     "@tanstack/react-query": "npm:^5.18.1"
     "@types/axios": "npm:^0.14.0"
     "@types/node": "npm:^20.11.17"

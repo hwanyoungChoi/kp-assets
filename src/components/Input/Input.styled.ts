@@ -7,12 +7,22 @@ export const Container = styled.div<{ isFocused?: boolean }>`
   padding: 17px 19px;
   border-radius: 16px;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 
   ${(props) =>
     props.isFocused &&
     css`
       border: 2px solid ${COLORS.B10};
     `}
+`;
+
+export const BigTitle = styled.div`
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 400;
+  color: ${COLORS.B12};
 `;
 
 export const Title = styled.div<{ isError?: boolean }>`
@@ -26,12 +36,17 @@ export const InputWrapper = styled.div`
   position: relative;
   width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  gap: 5px;
+
+  > div {
+    flex: 1;
+  }
 `;
 
 export const Input = styled.input`
-  flex: 1;
-
+  width: 100%;
   font-size: 20px;
   line-height: 28px;
   font-weight: 400;
@@ -47,7 +62,8 @@ export const Input = styled.input`
 
 export const Tooltip = styled.div`
   position: absolute;
-  bottom: -26px;
+  left: -2px;
+  bottom: -28px;
   background-color: ${COLORS.R10};
 
   padding: 4px 9px;
@@ -62,10 +78,9 @@ export const Tooltip = styled.div`
 
 export const TooltipArrow = styled.div`
   position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 5px;
+  bottom: 100%;
+  left: 8px;
+  border-width: 5px 5px 6px;
   border-style: solid;
-  border-color: ${COLORS.R10} transparent transparent transparent;
+  border-color: transparent transparent ${COLORS.R10} transparent;
 `;

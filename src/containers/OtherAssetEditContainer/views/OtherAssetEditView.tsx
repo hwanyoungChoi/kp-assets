@@ -1,11 +1,55 @@
 import TextButton from '@/components/Button/TextButton';
 import * as S from './OtherAssetEditView.styled';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import useAssetCreate from '@/hooks/mutations/useAssetCreate';
+import useAssetUpdate from '@/hooks/mutations/useAssetUpdate';
+import { AssetType } from '@/types';
 
 export default function OtherAssetEditView() {
-  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
+  const { id } = useParams<{ id: string }>();
   const isRegister = !id;
+
+  const createAsset = useAssetCreate();
+  const updateAsset = useAssetUpdate();
+
+  const handleCreateButtonClick = async () => {
+    try {
+      await createAsset.mutateAsync({
+        asset: {
+          name: 'test',
+          amount: 33333333,
+          type: 'ASSETS',
+          memo: 'ddd',
+        },
+        type: AssetType.Assets,
+      });
+
+      navigate(-1);
+    } catch {
+      window.alert('오류 발생');
+    }
+  };
+
+  const handleUpdateButtonClick = async () => {
+    try {
+      await updateAsset.mutateAsync({
+        id: 951,
+        asset: {
+          name: 'hello',
+          amount: 100,
+          type: 'ASSETS',
+          memo: 'aa',
+        },
+        type: AssetType.Assets,
+      });
+
+      navigate(-1);
+    } catch {
+      window.alert('오류 발생');
+    }
+  };
 
   return (
     <S.Container>
@@ -21,9 +65,9 @@ export default function OtherAssetEditView() {
 
       <S.ButtonWrapper>
         {isRegister ? (
-          <TextButton>등록하기</TextButton>
+          <TextButton onClick={handleCreateButtonClick}>등록하기</TextButton>
         ) : (
-          <TextButton>수정하기</TextButton>
+          <TextButton onClick={handleUpdateButtonClick}>수정하기</TextButton>
         )}
       </S.ButtonWrapper>
     </S.Container>

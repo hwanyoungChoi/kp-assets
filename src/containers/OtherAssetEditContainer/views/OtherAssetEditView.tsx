@@ -1,6 +1,6 @@
 import TextButton from '@/components/Button/TextButton';
 import * as S from './OtherAssetEditView.styled';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useAssetCreate from '@/hooks/mutations/useAssetCreate';
 import useAssetUpdate from '@/hooks/mutations/useAssetUpdate';
 import { AssetForm, AssetType } from '@/types';
@@ -8,6 +8,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Form from '../components/form/form';
+import { useEffect } from 'react';
 
 const SCHEMA = yup.object().shape({
   name: yup
@@ -34,6 +35,20 @@ export default function OtherAssetEditView() {
 
   const { id } = useParams<{ id: string }>();
   const isNew = !id;
+
+  const { state } = useLocation();
+
+  const methods = useForm({
+    mode: 'onBlur',
+    resolver: yupResolver(SCHEMA),
+  });
+  const { handleSubmit, reset } = methods;
+
+  useEffect(() => {
+    if (state?.form) {
+      reset(state.form);
+    }
+  }, [reset, state]);
 
   const createAsset = useAssetCreate();
   const updateAsset = useAssetUpdate();
@@ -64,12 +79,6 @@ export default function OtherAssetEditView() {
       window.alert('오류 발생');
     }
   };
-
-  const methods = useForm({
-    mode: 'onBlur',
-    resolver: yupResolver(SCHEMA),
-  });
-  const { handleSubmit } = methods;
 
   return (
     <FormProvider {...methods}>

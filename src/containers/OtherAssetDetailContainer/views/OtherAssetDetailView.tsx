@@ -34,7 +34,11 @@ export default function OtherAssetDetailView() {
   };
 
   const handleEditButtonClick = () => {
-    navigate(`/other-asset-edit/${id}`);
+    navigate(`/other-asset-edit/${id}`, {
+      state: {
+        form: detail,
+      },
+    });
   };
 
   return (

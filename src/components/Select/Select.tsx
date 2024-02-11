@@ -69,7 +69,7 @@ const Select = forwardRef<HTMLInputElement, Props>(
                   <S.Input
                     ref={forkedRef}
                     {...props}
-                    readOnly
+                    readOnly={!isFocused}
                     onChange={onChange}
                     onFocus={(e) => {
                       onFocus(e);

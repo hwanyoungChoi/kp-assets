@@ -3,6 +3,7 @@ import * as S from './form.styled';
 import Input from '@/components/Input';
 import Select from '@/components/Select';
 import { AssetType } from '@/types';
+import { ASSET_TYPE_KOR_MAP, ASSET_TYPE_MAP } from '@/lib/constants';
 
 export default function Form() {
   const {
@@ -15,7 +16,9 @@ export default function Form() {
   const { amount, type } = watch();
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('type', e.target.value);
+    const typeString = ASSET_TYPE_MAP[e.target.value as AssetType];
+
+    setValue('type', typeString);
 
     if (amount) {
       setValue('amount', -amount);
@@ -25,7 +28,7 @@ export default function Form() {
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, '');
 
-    if (type === AssetType.Liabilities) {
+    if (ASSET_TYPE_KOR_MAP[type] === AssetType.Liabilities) {
       setValue('amount', -value);
       return;
     }

@@ -16,10 +16,7 @@ const SCHEMA = yup.object().shape({
     .required()
     .min(2, '최소 2자부터 입력 가능해요')
     .max(20, '최대 20자까지 입력 가능해요'),
-  type: yup
-    .mixed<AssetType>()
-    .oneOf(Object.values(AssetType))
-    .required('필수 선택해 주세요'),
+  type: yup.string().required('필수 선택해 주세요'),
   amount: yup.string(),
   memo: yup
     .string()
@@ -33,7 +30,7 @@ const toParams = (asset: AssetForm) => {
   return {
     ...asset,
     amount: Number(asset.amount),
-    type: asset.type as AssetType,
+    type: asset.type === '자산' ? AssetType.Assets : AssetType.Liabilities,
     memo: asset.memo || undefined,
   };
 };
@@ -73,7 +70,7 @@ export default function OtherAssetEditView() {
     try {
       await createAsset.mutateAsync({
         asset: toParams(asset),
-        type: asset.type as AssetType,
+        type: toParams(asset).type as AssetType,
       });
 
       navigate(-1);

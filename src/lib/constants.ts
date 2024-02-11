@@ -6,6 +6,11 @@ export const ASSET_TYPE_MAP: { [TKey in AssetType]: string } = {
   [AssetType.Liabilities]: '부채',
 };
 
+export const ASSET_TYPE_KOR_MAP: Record<string, string> = {
+  자산: AssetType.Assets,
+  부채: AssetType.Liabilities,
+};
+
 export const DEFAULT_REACT_MODAL_CONTENT_STYLE: React.CSSProperties = {
   inset: 'initial',
   border: 'none',

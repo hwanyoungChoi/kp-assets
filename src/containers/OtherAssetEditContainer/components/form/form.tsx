@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import * as S from './form.styled';
+import * as S from './Form.styled';
 import Input from '@/components/Input';
 import Select from '@/components/Select';
 import { AssetType } from '@/types';
@@ -13,27 +13,35 @@ export default function Form() {
     setValue,
   } = useFormContext();
 
-  const { amount, type } = watch();
+  const { name, amount, type, memo } = watch();
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const typeString = ASSET_TYPE_MAP[e.target.value as AssetType];
-
     setValue('type', typeString);
 
     if (amount) {
-      setValue('amount', -amount);
+      if (ASSET_TYPE_KOR_MAP[typeString] === AssetType.Liabilities) {
+        setValue('amount', `-${amount}`);
+        return;
+      }
+
+      setValue('amount', amount.replace(/-/g, ''));
     }
   };
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, '');
+    const formattedValue = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-    if (ASSET_TYPE_KOR_MAP[type] === AssetType.Liabilities) {
-      setValue('amount', -value);
+    if (
+      ASSET_TYPE_KOR_MAP[type] === AssetType.Liabilities ||
+      type === AssetType.Liabilities
+    ) {
+      setValue('amount', `-${formattedValue}원`, { shouldDirty: true });
       return;
     }
 
-    setValue('amount', value);
+    setValue('amount', `${formattedValue}원`, { shouldDirty: true });
   };
 
   return (
@@ -41,7 +49,7 @@ export default function Form() {
       <Input
         {...register('name')}
         title="자산명"
-        value={watch('name') || ''}
+        value={name || ''}
         placeholder="예) 현금, 금, 빌려준 돈"
         errorMessage={errors?.name?.message as string}
       />
@@ -49,7 +57,7 @@ export default function Form() {
       <Select
         {...register('type')}
         title="분류"
-        value={watch('type') || ''}
+        value={type || ''}
         placeholder="선택하세요"
         errorMessage={errors?.type?.message as string}
         onChange={handleTypeChange}
@@ -58,7 +66,7 @@ export default function Form() {
       <Input
         {...register('amount')}
         title="자산가치"
-        value={watch('amount') || ''}
+        value={amount || ''}
         placeholder="금액을 입력하세요"
         errorMessage={errors?.amount?.message as string}
         inputMode="numeric"
@@ -68,7 +76,7 @@ export default function Form() {
       <Input
         {...register('memo')}
         title="메모"
-        value={watch('memo') || ''}
+        value={memo || ''}
         placeholder="메모를 입력하세요"
         errorMessage={errors?.memo?.message as string}
       />

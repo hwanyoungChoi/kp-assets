@@ -16,7 +16,7 @@ export interface AssetItem extends Asset {
 
 export interface AssetForm {
   name: string;
-  amount?: string;
+  amount: string;
   type?: string;
   memo?: string | null;
 }

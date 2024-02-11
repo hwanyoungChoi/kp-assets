@@ -9,6 +9,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Form from '../components/form';
 import { useEffect } from 'react';
 import Button from '@/components/Button/Button';
+import { toFormattedPrice } from '@/lib/utils';
+import { ASSET_TYPE_KOR_MAP } from '@/lib/constants';
 
 const SCHEMA = yup.object().shape({
   name: yup
@@ -17,7 +19,7 @@ const SCHEMA = yup.object().shape({
     .min(2, '최소 2자부터 입력 가능해요')
     .max(20, '최대 20자까지 입력 가능해요'),
   type: yup.string().required('필수 선택해 주세요'),
-  amount: yup.string(),
+  amount: yup.string().required(),
   memo: yup
     .string()
     .min(2, '최소 2자를 입력해 주세요')
@@ -27,9 +29,18 @@ const SCHEMA = yup.object().shape({
 });
 
 const toParams = (asset: AssetForm) => {
+  let amount;
+
+  if (typeof asset.amount === 'string') {
+    const sanitizedAmount = asset.amount.replace(/[^\d.-]/g, '');
+    amount = Number(sanitizedAmount);
+  } else {
+    amount = asset.amount;
+  }
+
   return {
     ...asset,
-    amount: Number(asset.amount),
+    amount,
     type: asset.type === '자산' ? AssetType.Assets : AssetType.Liabilities,
     memo: asset.memo || undefined,
   };
@@ -59,7 +70,10 @@ export default function OtherAssetEditView() {
 
   useEffect(() => {
     if (state?.form) {
-      reset(state.form);
+      reset({
+        ...state.form,
+        amount: toFormattedPrice(state.form.amount),
+      });
     }
   }, [reset, state]);
 

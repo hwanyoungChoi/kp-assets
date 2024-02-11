@@ -46,7 +46,7 @@ export default function OtherAssetEditView() {
     handleSubmit,
     reset,
     watch,
-    formState: { isValid },
+    formState: { isValid, isDirty },
   } = methods;
 
   const { name, type, amount } = watch();
@@ -79,7 +79,7 @@ export default function OtherAssetEditView() {
       await updateAsset.mutateAsync({
         id,
         asset,
-        type: asset.type as AssetType,
+        type: state?.form?.type as AssetType,
       });
 
       navigate(-1);
@@ -90,9 +90,7 @@ export default function OtherAssetEditView() {
 
   return (
     <FormProvider {...methods}>
-      <S.Container
-        onSubmit={isNew ? handleSubmit(onCreate) : handleSubmit(onUpdate)}
-      >
+      <S.Container onSubmit={handleSubmit(isNew ? onCreate : onUpdate)}>
         <S.InnerContainer>
           <h1>
             현금부터 실물 자산까지
@@ -108,7 +106,7 @@ export default function OtherAssetEditView() {
             type="submit"
             width="100%"
             variant="primary"
-            disabled={!enableRegister && !isValid}
+            disabled={(!enableRegister && !isValid) || !isDirty}
           >
             {isNew ? '등록하기' : '수정하기'}
           </Button>

@@ -52,7 +52,7 @@ export default function OtherAssetDetailView() {
 
         <S.Info>
           분류
-          <em>{ASSET_TYPE_MAP[type]}</em>
+          <em>{ASSET_TYPE_MAP[detail?.type as AssetType]}</em>
         </S.Info>
         <S.Info>
           자산가치

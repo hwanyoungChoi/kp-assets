@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import Button from '@/components/Button/Button';
 import { toFormattedPrice } from '@/lib/utils';
 import { ASSET_TYPE_MAP } from '@/lib/constants';
+import queryClient from '@/lib/api/queryClient';
 
 const SCHEMA = yup.object().shape({
   name: yup
@@ -118,12 +119,17 @@ export default function OtherAssetEditView() {
   const createAsset = useAssetCreate();
   const updateAsset = useAssetUpdate();
 
+  const isPending = createAsset.isPending || updateAsset.isPending;
+
   const onCreate = async (asset: AssetForm) => {
     try {
       await createAsset.mutateAsync({
         asset: toParams(asset),
         type: toParams(asset).type as AssetType,
       });
+
+      await queryClient.refetchQueries({ queryKey: ['assets'] });
+      await queryClient.refetchQueries({ queryKey: ['liabilities'] });
 
       navigate(-1);
     } catch {
@@ -163,7 +169,7 @@ export default function OtherAssetEditView() {
             type="submit"
             width="100%"
             variant="primary"
-            disabled={(!enableRegister && !isValid) || !isDirty}
+            disabled={(!enableRegister && !isValid) || !isDirty || isPending}
           >
             {isNew ? '등록하기' : '수정하기'}
           </Button>

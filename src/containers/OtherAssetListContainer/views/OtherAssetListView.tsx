@@ -14,13 +14,15 @@ export default function OtherAssetListView() {
   const { data: assets } = useAssets();
   const { data: liabilities } = useLiabilities();
 
-  const totalCount = (assets?.length || 0) + (liabilities?.length || 0);
-
   useEffect(() => {
-    if (!totalCount) {
-      navigate('/other-asset-edit');
+    if (assets && liabilities) {
+      const totalCount = assets.length + liabilities.length;
+
+      if (!totalCount) {
+        navigate('/other-asset-edit');
+      }
     }
-  }, [navigate, totalCount]);
+  }, [assets, liabilities, navigate]);
 
   const totalAssetsAmount =
     assets?.reduce((acc, item) => acc + item.amount, 0) || 0;

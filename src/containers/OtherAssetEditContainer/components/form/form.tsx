@@ -46,6 +46,13 @@ export default function Form() {
     setValue('amount', `${formattedValue}원`, { shouldDirty: true });
   };
 
+  const handleAmountKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && amount.endsWith('원')) {
+      const newValue = amount.slice(0, -1);
+      setValue('amount', newValue, { shouldDirty: true });
+    }
+  };
+
   return (
     <S.Container>
       <Input
@@ -73,6 +80,7 @@ export default function Form() {
         errorMessage={errors?.amount?.message as string}
         inputMode="numeric"
         onChange={handleAmountChange}
+        onKeyDown={handleAmountKeyDown}
       />
       <S.Divider />
       <Input

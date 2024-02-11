@@ -5,6 +5,7 @@ import IconTriangle from '@/assets/icon_triangle.svg?react';
 import IconCheck from '@/assets/icon_check.svg?react';
 import { AssetType } from '@/types';
 import BottomSheetModal from '../BottomSheetModal';
+import { ASSET_TYPE_KOR_MAP } from '@/lib/constants';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   title?: string;
@@ -58,6 +59,13 @@ const Select = forwardRef<HTMLInputElement, Props>(
       setIsFocused(false);
     };
 
+    const isAssets =
+      props.value === AssetType.Assets ||
+      ASSET_TYPE_KOR_MAP[props.value as string] === AssetType.Assets;
+    const isLialibities =
+      props.value === AssetType.Liabilities ||
+      ASSET_TYPE_KOR_MAP[props.value as string] === AssetType.Liabilities;
+
     return (
       <>
         <S.Container onClick={handleClick} isFocused={isFocused || isError}>
@@ -105,18 +113,18 @@ const Select = forwardRef<HTMLInputElement, Props>(
         >
           <>
             <S.ModalBodyItem
-              isSelected={props.value === AssetType.Assets}
+              isSelected={isAssets}
               onClick={() => handleTypeItemClick(AssetType.Assets)}
             >
               자산
-              {props.value === AssetType.Assets && <IconCheck />}
+              {isAssets && <IconCheck />}
             </S.ModalBodyItem>
             <S.ModalBodyItem
-              isSelected={props.value === AssetType.Liabilities}
+              isSelected={isLialibities}
               onClick={() => handleTypeItemClick(AssetType.Liabilities)}
             >
               부채
-              {props.value === AssetType.Liabilities && <IconCheck />}
+              {isLialibities && <IconCheck />}
             </S.ModalBodyItem>
           </>
         </BottomSheetModal>

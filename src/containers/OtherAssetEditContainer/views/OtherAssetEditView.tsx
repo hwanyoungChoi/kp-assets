@@ -10,6 +10,7 @@ import Form from '../components/form';
 import { useEffect } from 'react';
 import Button from '@/components/Button/Button';
 import { toFormattedPrice } from '@/lib/utils';
+import { ASSET_TYPE_MAP } from '@/lib/constants';
 
 const SCHEMA = yup.object().shape({
   name: yup
@@ -78,6 +79,7 @@ export default function OtherAssetEditView() {
       reset({
         ...state.form,
         amount: toFormattedPrice(state.form.amount),
+        type: ASSET_TYPE_MAP[state.form.type as AssetType],
       });
     }
   }, [reset, state]);

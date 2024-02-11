@@ -13,6 +13,7 @@ import Button from '@/components/Button/Button';
 const SCHEMA = yup.object().shape({
   name: yup
     .string()
+    .required()
     .min(2, '최소 2자부터 입력 가능해요')
     .max(20, '최대 20자까지 입력 가능해요'),
   type: yup
@@ -27,6 +28,15 @@ const SCHEMA = yup.object().shape({
     .nullable()
     .transform((value) => (value ? value : undefined)),
 });
+
+const toParams = (asset: AssetForm) => {
+  return {
+    ...asset,
+    amount: Number(asset.amount),
+    type: asset.type as AssetType,
+    memo: asset.memo || undefined,
+  };
+};
 
 export default function OtherAssetEditView() {
   const navigate = useNavigate();
@@ -62,7 +72,7 @@ export default function OtherAssetEditView() {
   const onCreate = async (asset: AssetForm) => {
     try {
       await createAsset.mutateAsync({
-        asset,
+        asset: toParams(asset),
         type: asset.type as AssetType,
       });
 
@@ -76,7 +86,7 @@ export default function OtherAssetEditView() {
     try {
       await updateAsset.mutateAsync({
         id,
-        asset,
+        asset: toParams(asset),
         type: state?.form?.type as AssetType,
       });
 

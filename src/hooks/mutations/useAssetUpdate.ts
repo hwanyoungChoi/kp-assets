@@ -1,10 +1,10 @@
 import client from '@/lib/api/client';
-import { AssetForm, AssetType } from '@/types';
+import { Asset, AssetType } from '@/types';
 import { useMutation } from '@tanstack/react-query';
 
 export interface AssetUpdateRequest {
   id?: number | string;
-  asset: AssetForm;
+  asset: Asset;
   type: AssetType;
 }
 

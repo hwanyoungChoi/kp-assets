@@ -83,8 +83,10 @@ const Select = forwardRef<HTMLInputElement, Props>(
                       onFocus(e);
                     }}
                     onBlur={(e) => {
-                      setIsFocused(false);
-                      onBlur(e);
+                      if (!isOpenModal) {
+                        setIsFocused(false);
+                        onBlur(e);
+                      }
                     }}
                   />
                 </div>

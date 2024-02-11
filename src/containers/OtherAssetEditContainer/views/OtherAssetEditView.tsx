@@ -30,20 +30,15 @@ const SCHEMA = yup.object().shape({
 });
 
 const toParams = (asset: AssetForm) => {
-  let amount;
-  if (typeof asset.amount === 'string') {
-    const sanitizedAmount = asset.amount.replace(/[^\d.-]/g, '');
-    amount = Number(sanitizedAmount);
-  } else {
-    amount = asset.amount;
-  }
+  const amount =
+    typeof asset.amount === 'string'
+      ? Number(asset.amount.replace(/[^\d.-]/g, ''))
+      : asset.amount;
 
-  let type;
-  if (asset.type === '자산' || asset.type === AssetType.Assets) {
-    type = AssetType.Assets;
-  } else {
-    type = AssetType.Liabilities;
-  }
+  const type =
+    asset.type === '자산' || asset.type === AssetType.Assets
+      ? AssetType.Assets
+      : AssetType.Liabilities;
 
   return {
     ...asset,

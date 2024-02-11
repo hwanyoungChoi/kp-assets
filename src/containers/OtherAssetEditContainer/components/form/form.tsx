@@ -17,16 +17,18 @@ export default function Form() {
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const typeString = ASSET_TYPE_MAP[e.target.value as AssetType];
-    setValue('type', typeString);
+    setValue('type', typeString, { shouldDirty: true });
 
-    if (amount) {
-      if (ASSET_TYPE_KOR_MAP[typeString] === AssetType.Liabilities) {
-        if (!amount.startsWith('-')) {
-          setValue('amount', `-${amount}`);
-        }
-        return;
-      }
+    // 선택한 type에 따라 금액 부호를 바꾼다.
+    if (!amount) return;
 
+    const isLiability =
+      ASSET_TYPE_KOR_MAP[typeString] === AssetType.Liabilities;
+    const isNegative = amount.startsWith('-');
+
+    if (isLiability && !isNegative) {
+      setValue('amount', `-${amount}`);
+    } else if (!isLiability && isNegative) {
       setValue('amount', amount.replace(/-/g, ''));
     }
   };

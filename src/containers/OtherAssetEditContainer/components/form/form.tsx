@@ -35,6 +35,11 @@ export default function Form() {
     const value = e.target.value.replace(/\D/g, '');
     const formattedValue = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
+    if (!value) {
+      setValue('amount', '');
+      return;
+    }
+
     if (
       ASSET_TYPE_KOR_MAP[type] === AssetType.Liabilities ||
       type === AssetType.Liabilities

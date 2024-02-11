@@ -13,6 +13,7 @@ const COLORS = {
   R10: '#FF3C3C',
 
   Y10: '#FFEB00',
+  Y11: '#FFEB0052',
 
   dim: '#00000099',
 } as const;

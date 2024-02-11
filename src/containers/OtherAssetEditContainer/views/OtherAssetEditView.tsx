@@ -7,7 +7,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Form from '../components/form';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@/components/Button/Button';
 import { toFormattedPrice } from '@/lib/utils';
 import { ASSET_TYPE_MAP } from '@/lib/constants';
@@ -53,6 +53,37 @@ const toParams = (asset: AssetForm) => {
 };
 
 export default function OtherAssetEditView() {
+  const [buttonHeight, setButtonHeight] = useState(0);
+
+  useEffect(() => {
+    const handleResize = (e: any) => {
+      const visualViewportHeight = e.target.height;
+      const innerHeight = window.innerHeight;
+
+      if (innerHeight - visualViewportHeight > 0) {
+        setButtonHeight(innerHeight - visualViewportHeight);
+      } else {
+        setButtonHeight(0);
+      }
+    };
+
+    visualViewport?.addEventListener('resize', handleResize);
+
+    window.addEventListener(
+      'touchmove',
+      () => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        window.document.activeElement?.blur();
+      },
+      false,
+    );
+
+    return () => {
+      visualViewport?.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const navigate = useNavigate();
 
   const { id } = useParams<{ id: string }>();
@@ -127,7 +158,7 @@ export default function OtherAssetEditView() {
           <Form />
         </S.InnerContainer>
 
-        <S.ButtonWrapper>
+        <S.ButtonWrapper buttonHeight={buttonHeight}>
           <Button
             type="submit"
             width="100%"

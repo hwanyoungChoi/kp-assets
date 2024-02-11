@@ -4,6 +4,7 @@ import ButtonBase from './ButtonBase';
 import COLORS from '@/lib/colors';
 
 export const Base = styled(ButtonBase)`
+  position: relative;
   background-color: transparent;
   border: 0;
   font-size: 16px;
@@ -15,12 +16,6 @@ export const Base = styled(ButtonBase)`
     width &&
     css`
       width: ${width};
-    `}
-
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.32;
     `}
 
   ${({ size }) => {
@@ -58,4 +53,14 @@ export const Base = styled(ButtonBase)`
         `;
     }
   }}
+`;
+
+export const Layer = styled.div`
+  position: absolute;
+  top: 0;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.68);
+  z-index: 1;
 `;

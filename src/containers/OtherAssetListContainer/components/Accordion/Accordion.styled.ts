@@ -22,7 +22,7 @@ export const Collapse = styled.div`
   font-size: 18px;
   line-height: 26px;
   font-weight: 500;
-  color: ${COLORS.B10};
+  color: ${COLORS.N20};
 `;
 
 export const CollapseIconWrapper = styled.div<{ isOpen: boolean }>`

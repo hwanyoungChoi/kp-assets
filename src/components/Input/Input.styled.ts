@@ -14,7 +14,7 @@ export const Container = styled.div<{ isFocused?: boolean }>`
   ${(props) =>
     props.isFocused &&
     css`
-      border: 2px solid ${COLORS.B10};
+      border: 2px solid ${COLORS.N20};
     `}
 `;
 
@@ -22,7 +22,7 @@ export const BigTitle = styled.div`
   font-size: 20px;
   line-height: 28px;
   font-weight: 400;
-  color: ${COLORS.B12};
+  color: ${COLORS.N22};
 `;
 
 export const Title = styled.div<{ isError?: boolean }>`
@@ -50,13 +50,13 @@ export const Input = styled.input`
   font-size: 20px;
   line-height: 28px;
   font-weight: 400;
-  color: ${COLORS.B20};
+  color: ${COLORS.N30};
   border: none;
   outline: none;
-  caret-color: ${COLORS.B20};
+  caret-color: ${COLORS.N30};
 
   ::placeholder {
-    color: ${COLORS.B22};
+    color: ${COLORS.N32};
   }
 `;
 

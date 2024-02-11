@@ -48,7 +48,7 @@ export const Base = styled(ButtonBase)`
       case 'primary':
         return css`
           background-color: ${COLORS.Y10};
-          color: ${COLORS.B10};
+          color: ${COLORS.N20};
         `;
       // Default
       default:

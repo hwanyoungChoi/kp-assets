@@ -13,7 +13,7 @@ export const TotalSection = styled.div`
   flex-direction: column;
   gap: 5px;
 
-  color: ${COLORS.B10};
+  color: ${COLORS.N20};
   font-size: 18px;
   line-height: 26px;
   font-weight: 700;

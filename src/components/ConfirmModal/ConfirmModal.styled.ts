@@ -23,7 +23,7 @@ export const Title = styled.div`
   font-weight: 700;
   font-size: 20px;
   line-height: 28px;
-  color: ${COLORS.B10};
+  color: ${COLORS.N20};
 `;
 
 export const Message = styled.div`
@@ -31,7 +31,7 @@ export const Message = styled.div`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: ${COLORS.B10};
+  color: ${COLORS.N20};
 `;
 
 export const Footer = styled.div`

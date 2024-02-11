@@ -22,7 +22,7 @@ export const Title = styled.div`
   font-size: 20px;
   line-height: 28px;
   font-weight: 700;
-  color: ${COLORS.B10};
+  color: ${COLORS.N20};
   text-align: left;
 `;
 

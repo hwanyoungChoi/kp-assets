@@ -27,7 +27,7 @@ export const Info = styled.div`
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-  color: ${COLORS.B20};
+  color: ${COLORS.N30};
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -46,7 +46,7 @@ export const EditButtonWrapper = styled.div`
 `;
 
 export const EditButton = styled(ButtonBase)`
-  color: ${COLORS.S10};
+  color: ${COLORS.B10};
 `;
 
 export const ButtonWrapper = styled.div`

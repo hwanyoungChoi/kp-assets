@@ -3,7 +3,7 @@ import ButtonBase from './ButtonBase';
 import COLORS from '@/lib/colors';
 
 export const Base = styled(ButtonBase)`
-  color: ${COLORS.B11};
+  color: ${COLORS.N21};
   text-decoration: underline;
   text-underline-offset: 6px;
 

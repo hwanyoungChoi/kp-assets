@@ -16,12 +16,12 @@ export const ItemInfo = styled.div`
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
-  color: ${COLORS.B21};
+  color: ${COLORS.N31};
 
   > em {
     font-size: 16px;
     line-height: 24px;
     font-weight: 500;
-    color: ${COLORS.B10};
+    color: ${COLORS.N20};
   }
 `;

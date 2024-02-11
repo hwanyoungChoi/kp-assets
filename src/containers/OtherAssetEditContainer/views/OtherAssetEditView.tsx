@@ -42,7 +42,15 @@ export default function OtherAssetEditView() {
     mode: 'onBlur',
     resolver: yupResolver(SCHEMA),
   });
-  const { handleSubmit, reset } = methods;
+  const {
+    handleSubmit,
+    reset,
+    watch,
+    formState: { isValid },
+  } = methods;
+
+  const { name, type, amount } = watch();
+  const enableRegister = !!name && !!type && !!amount;
 
   useEffect(() => {
     if (state?.form) {
@@ -96,7 +104,12 @@ export default function OtherAssetEditView() {
         </S.InnerContainer>
 
         <S.ButtonWrapper>
-          <Button type="submit" width="100%" variant="primary">
+          <Button
+            type="submit"
+            width="100%"
+            variant="primary"
+            disabled={!enableRegister && !isValid}
+          >
             {isNew ? '등록하기' : '수정하기'}
           </Button>
         </S.ButtonWrapper>

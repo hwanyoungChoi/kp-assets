@@ -37,10 +37,6 @@ const Input = forwardRef<HTMLInputElement, Props>(
 
     const handleClick = () => {
       setIsFocused(true);
-
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
     };
 
     const handleClearButtonClick = () => {

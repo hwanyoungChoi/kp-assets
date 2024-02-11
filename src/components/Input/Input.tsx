@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import * as S from './Input.styled';
-import useForkRef from '@rooks/use-fork-ref';
+import { useForkRef } from 'rooks';
 import IconCircleClose from '@/assets/icon_circle_close.svg?react';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -21,7 +21,7 @@ const Input = forwardRef<HTMLInputElement, Props>(
     ref,
   ) => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const forkedRef = useForkRef(ref as any, inputRef);
+    const forkedRef = useForkRef(ref, inputRef);
 
     const [isFocused, setIsFocused] = useState(false);
     const hasValue = !!props.value;

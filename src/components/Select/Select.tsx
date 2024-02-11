@@ -1,6 +1,6 @@
 import { forwardRef, useRef, useState } from 'react';
 import * as S from './Select.styled';
-import useForkRef from '@rooks/use-fork-ref';
+import { useForkRef } from 'rooks';
 import IconTriangle from '@/assets/icon_triangle.svg?react';
 import IconCheck from '@/assets/icon_check.svg?react';
 import { AssetType } from '@/types';
@@ -24,7 +24,7 @@ const Select = forwardRef<HTMLInputElement, Props>(
     ref,
   ) => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const forkedRef = useForkRef(ref as any, inputRef);
+    const forkedRef = useForkRef(ref, inputRef);
 
     const [isOpenModal, setIsOpenModal] = useState(false);
 

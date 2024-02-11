@@ -14,6 +14,8 @@ const COLORS = {
   R10: '#FF3C3C',
 
   Y10: '#FFEB00',
+
+  dim: '#00000099',
 } as const;
 
 export default COLORS;

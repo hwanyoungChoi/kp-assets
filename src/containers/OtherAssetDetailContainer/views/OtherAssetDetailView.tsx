@@ -7,6 +7,8 @@ import { ASSET_TYPE_MAP } from '@/lib/constants';
 import TextButton from '@/components/Button/TextButton';
 import IconChevronRight from '@/assets/icon_chevron_right.svg?react';
 import useAssetDelete from '@/hooks/mutations/useAssetDelete';
+import { useState } from 'react';
+import ConfirmModal from '@/components/ConfirmModal';
 
 export default function OtherAssetDetailView() {
   const navigate = useNavigate();
@@ -20,17 +22,10 @@ export default function OtherAssetDetailView() {
   const { data: detail } = useAsset({ id, type });
   const deleteAsset = useAssetDelete();
 
-  const handleDeleteButtonClick = async () => {
-    if (!window.confirm('자산을 삭제할까요?')) {
-      return;
-    }
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
-    try {
-      await deleteAsset.mutateAsync({ id, type });
-      navigate(-1);
-    } catch {
-      window.alert('오류발생');
-    }
+  const handleDeleteButtonClick = () => {
+    setIsOpenModal(true);
   };
 
   const handleEditButtonClick = () => {
@@ -39,6 +34,15 @@ export default function OtherAssetDetailView() {
         form: detail,
       },
     });
+  };
+
+  const onDelete = async () => {
+    try {
+      await deleteAsset.mutateAsync({ id, type });
+      navigate(-1);
+    } catch {
+      window.alert('오류발생');
+    }
   };
 
   return (
@@ -73,6 +77,14 @@ export default function OtherAssetDetailView() {
         <TextButton onClick={handleDeleteButtonClick}>삭제하기</TextButton>
         <TextButton onClick={handleEditButtonClick}>수정하기</TextButton>
       </S.ButtonWrapper>
+
+      <ConfirmModal
+        isOpen={isOpenModal}
+        title="자산을 삭제할까요?"
+        message="삭제한 자산은 복구할 수 없어요"
+        onClose={() => setIsOpenModal(false)}
+        onConfirm={onDelete}
+      />
     </S.Container>
   );
 }

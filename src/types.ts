@@ -11,4 +11,9 @@ export interface AssetItem {
   memo?: string;
 }
 
-export type AssetForm = Omit<AssetItem, 'id'>;
+export interface AssetForm {
+  name?: string;
+  amount?: string;
+  type?: string;
+  memo?: string | null;
+}

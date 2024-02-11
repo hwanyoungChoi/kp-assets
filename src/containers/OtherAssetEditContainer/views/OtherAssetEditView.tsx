@@ -10,7 +10,6 @@ import Form from '../components/form';
 import { useEffect } from 'react';
 import Button from '@/components/Button/Button';
 import { toFormattedPrice } from '@/lib/utils';
-import { ASSET_TYPE_KOR_MAP } from '@/lib/constants';
 
 const SCHEMA = yup.object().shape({
   name: yup
@@ -30,7 +29,6 @@ const SCHEMA = yup.object().shape({
 
 const toParams = (asset: AssetForm) => {
   let amount;
-
   if (typeof asset.amount === 'string') {
     const sanitizedAmount = asset.amount.replace(/[^\d.-]/g, '');
     amount = Number(sanitizedAmount);
@@ -38,10 +36,17 @@ const toParams = (asset: AssetForm) => {
     amount = asset.amount;
   }
 
+  let type;
+  if (asset.type === '자산' || asset.type === AssetType.Assets) {
+    type = AssetType.Assets;
+  } else {
+    type = AssetType.Liabilities;
+  }
+
   return {
     ...asset,
     amount,
-    type: asset.type === '자산' ? AssetType.Assets : AssetType.Liabilities,
+    type,
     memo: asset.memo || undefined,
   };
 };

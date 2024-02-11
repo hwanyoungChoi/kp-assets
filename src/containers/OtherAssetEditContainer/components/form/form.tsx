@@ -21,7 +21,9 @@ export default function Form() {
 
     if (amount) {
       if (ASSET_TYPE_KOR_MAP[typeString] === AssetType.Liabilities) {
-        setValue('amount', `-${amount}`);
+        if (!amount.startsWith('-')) {
+          setValue('amount', `-${amount}`);
+        }
         return;
       }
 
